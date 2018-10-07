@@ -31,7 +31,8 @@ namespace phonebook.Controllers
         [HttpPost]
         public ActionResult Create(PersonViewModel collection)
         {
-            try
+            // try
+            if (collection!=null)
             {
                 // TODO: Add insert logic here
                 PhoneBookDbEntities db = new PhoneBookDbEntities();
@@ -39,6 +40,7 @@ namespace phonebook.Controllers
                 p.PersonId = collection.PersonId;
                 p.FirstName = collection.FirstName;
                 p.MiddleName = collection.MiddleName;
+                p.LastName = collection.LastName;
                 p.DateOfBirth = collection.DateOfBirth;
                 p.AddedOn = DateTime.Now.Date;
                 p.AddedBy = "cdd";
@@ -49,17 +51,44 @@ namespace phonebook.Controllers
                 p.TwitterId = collection.TwitterId;
                 p.EmailId = collection.EmailId;
 
-                db.Person.add(p);
-             
- 
+                db.People.Add(p);
+                // db.SaveChanges();
+
+
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
-        }
+                // 
 
+            //}
+            
+                return View(collection);
+           
+        
+
+
+
+           // catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+           // {
+           //     Exception raise = dbEx;
+           //     foreach (var validationErrors in dbEx.EntityValidationErrors)
+           //     {
+           //         foreach (var validationError in validationErrors.ValidationErrors)
+           //         {
+           //             string message = string.Format("{0}:{1}",
+           //                 validationErrors.Entry.Entity.ToString(),
+           //                 validationError.ErrorMessage);
+           //             // raise a new exception nesting  
+           //             // the current instance as InnerException  
+           //             raise = new InvalidOperationException(message, raise);
+           //         }
+           //     }
+           //     throw raise;
+              
+
+           // }
+           //// return View(PersonViewModel);
+
+        }
         // GET: person/Edit/5
         public ActionResult Edit(int id)
         {
