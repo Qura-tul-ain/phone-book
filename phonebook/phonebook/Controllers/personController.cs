@@ -12,7 +12,31 @@ namespace phonebook.Controllers
         // GET: person
         public ActionResult Index()
         {
-            return View();
+            PhoneBookDbEntities db = new PhoneBookDbEntities();
+            List<Person> list = db.People.ToList();
+            List<PersonViewModel> viewlist = new List<PersonViewModel>();
+            // viewlist = new viewlist();
+            // ViewData j = new ViewData();
+            foreach (Person s in list)
+            {
+                PersonViewModel obj = new PersonViewModel();
+                obj.PersonId = s.PersonId;
+                obj.FirstName = s.FirstName;
+                obj.MiddleName = s.MiddleName;
+                obj.LastName = s.LastName;
+                obj.DateOfBirth = s.DateOfBirth;
+                obj.AddedOn = DateTime.Now.Date;
+                obj.AddedBy = "cdd";
+                obj.HomeAddress = s.HomeAddress;
+                obj.HomeCity = s.HomeCity;
+                obj.FaceBookAccountId = s.FaceBookAccountId;
+                obj.LinkedInId = s.LinkedInId;
+                obj.TwitterId = s.TwitterId;
+                obj.EmailId = s.EmailId;
+                viewlist.Add(obj);
+            }
+            return View(viewlist);
+           
         }
 
         // GET: person/Details/5
