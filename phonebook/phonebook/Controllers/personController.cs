@@ -56,38 +56,41 @@ namespace phonebook.Controllers
         public ActionResult Create(PersonViewModel collection)
         {
             // try
-            if (collection!=null)
+            if (collection != null)
             {
-                // TODO: Add insert logic here
-                PhoneBookDbEntities db = new PhoneBookDbEntities();
-                Person p = new Person();
-                p.PersonId = collection.PersonId;
-                p.FirstName = collection.FirstName;
-                p.MiddleName = collection.MiddleName;
-                p.LastName = collection.LastName;
-                p.DateOfBirth = collection.DateOfBirth;
-                p.AddedOn = DateTime.Now.Date;
-                p.AddedBy = "cdd";
-                p.HomeAddress = collection.HomeAddress;
-                p.HomeCity = collection.HomeCity;
-                p.FaceBookAccountId = collection.FaceBookAccountId;
-                p.LinkedInId = collection.LinkedInId;
-                p.TwitterId = collection.TwitterId;
-                p.EmailId = collection.EmailId;
+                try
+                {
+                    // TODO: Add insert logic here
+                    PhoneBookDbEntities db = new PhoneBookDbEntities();
+                    Person p = new Person();
+                    p.PersonId = collection.PersonId;
+                    p.FirstName = collection.FirstName;
+                    p.MiddleName = collection.MiddleName;
+                    p.LastName = collection.LastName;
+                    p.DateOfBirth = collection.DateOfBirth;
+                    p.AddedOn = DateTime.Now.Date;
+                    p.AddedBy = "cdd";
+                    p.HomeAddress = collection.HomeAddress;
+                    p.HomeCity = collection.HomeCity;
+                    p.FaceBookAccountId = collection.FaceBookAccountId;
+                    p.LinkedInId = collection.LinkedInId;
+                    p.TwitterId = collection.TwitterId;
+                    p.EmailId = collection.EmailId;
 
-                db.People.Add(p);
-                // db.SaveChanges();
+                    db.People.Attach(p);
+                    db.SaveChanges();
 
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+
+                }
             }
-                // 
 
-            //}
-            
-                return View(collection);
-           
-        
+                return View();
+
 
 
 
