@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using Microsoft.AspNet.Identity.Owin;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using phone_book;
+using Microsoft.AspNet.Identity;
 
 namespace phone_book.Controllers
 {
@@ -55,6 +57,8 @@ namespace phone_book.Controllers
         {
             person.UpdateOn = DateTime.Now.Date;
             person.AddedOn = DateTime.Now.Date;
+    
+
             if (ModelState.IsValid)
             {
                 db.People.Add(person);

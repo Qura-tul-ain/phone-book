@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -11,6 +12,8 @@ namespace phone_book.Models
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
+        [Required]
+        [DataType(DataType.DateTime)]
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public System.DateTime AddedOn { get; set; }
         public string AddedBy { get; set; }
