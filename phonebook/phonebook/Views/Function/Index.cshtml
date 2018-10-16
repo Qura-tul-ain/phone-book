@@ -1,0 +1,89 @@
+﻿@using Microsoft.AspNet.Identity;
+@model phonebook.Models.details
+
+@{
+    ViewBag.Title = "DashBored";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dashbored</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>details</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.PersonAdded, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PersonAdded, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PersonAdded, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+      
+
+        <div class="form-group">
+            <table>
+                <tr>
+                    <th>
+                        Names of person having BD in next 10 Days
+                    </th>
+                </tr>
+                @for (int i = 0; i < Model.totalname.Count; i++)
+                {
+                    @Html.HiddenFor(m => m.totalname[i].name1)
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => m.totalname[i].name1)
+                        </td>
+                       
+                    </tr>
+
+                }
+            </table>
+        </div>
+
+
+
+
+
+            <div class="form-group">
+                <table>
+                    <tr>
+                        <th>
+                            Names of person updated date in last 7 days
+                        </th>
+                    </tr>
+                    @for (int i = 0; i < Model.totalpersons.Count; i++)
+                    {
+                        @Html.HiddenFor(m => m.totalpersons[i].name3)
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => m.totalpersons[i].name3)
+                            </td>
+                         
+                        </tr>
+
+                    }
+                </table>
+            </div>
+        
+   </div> 
+}
+
+<div>
+    @Html.ActionLink("Add persons", "Create", "Person" ,new { id = User.Identity.GetUserId() },null )
+</div>
+
+<div>
+    @Html.ActionLink("Add Contacts", "Index", "Person", new { id = User.Identity.GetUserId() }, null)
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
